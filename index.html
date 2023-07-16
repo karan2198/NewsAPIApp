@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">NewsApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="Tech" class="nav-link" aria-current="page" href="#">Technology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="sports" class="nav-link" href="#">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="weather" class="nav-link" href="#">Weather</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="business" class="nav-link" href="#">Business</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="health" class="nav-link" href="#">Health</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search" />
+                    <button id="search" class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>News (<span id="resultCount"></span> Results)</h1>
+        <div class="row content">
+            <div class="card my-4 mx-2" style="width: 18rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                        Some quick example text to build on the card title and make up the
+                        bulk of the card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around my-4">
+            <button type="button" class="btn btn-primary" id="previous">
+                &lt; previous page</button> <button type="button" class="btn btn-primary" id="next"> next page
+                &gt;</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        let currentQuery = "sports"
+        let currentPage = 1
+        const fetchNews = async (page, q) => {
+            console.log("Fetching News...");
+            const url = 'https://newsapi.org/v2/everything?' + 'q=' + q + '&from=2023-07-15&' + 'to=2023-07-15&' + 'pageSize=20&' + 'page=' + page + '&sortBy=popularity&' + 'apiKey=893e90406e96486da7efc4244c066da2';
+
+            var req = new Request(url);
+            let a = await fetch(req)
+            let response = await a.json()
+            console.log(JSON.stringify(response))
+
+            console.log(response);
+            let str = ""
+            resultCount.innerHTML = response.totalResults;
+            for (let item of response.articles) {
+                str = str + `<div class="card my-4 mx-2" style="width: 18rem">
+                <img src="${item.urlToImage}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                    <h5 class="card-title">${item.title}</h5>
+                    <p class="card-text">
+                      ${item.description}
+                    </p>
+                    <a href="${item.url}" target="_blank" class="btn btn-primary">Read Article</a>
+                </div>
+            </div>`
+            }
+            document.querySelector(".content").innerHTML = str
+        };
+
+        fetchNews(1, currentQuery)
+        search.addEventListener("click", (e) => {
+            e.preventDefault();
+            let query = searchInput.value;
+            currentQuery = query;
+            fetchNews(1, query)
+        })
+        previous.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (currentPage > 1) {
+                currentPage = currentPage - 1
+                fetchNews(currentPage, currentQuery)
+            }
+        })
+        next.addEventListener("click", (e) => {
+            e.preventDefault();
+            currentPage = currentPage + 1;
+            fetchNews(currentPage, currentQuery)
+        })
+        Tech.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetchNews(1, "Technology");
+        })
+        sports.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetchNews(1, "Sports");
+        })
+        business.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetchNews(1, "Business");
+        })
+        weather.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetchNews(1, "Weather");
+        })
+        health.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetchNews(1, "Health");
+        })
+    </script>
+</body>
+</body>
+
+</html>
