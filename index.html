@@ -75,7 +75,7 @@
         let currentPage = 1
         const fetchNews = async (page, q) => {
             console.log("Fetching News...");
-            const url = 'https://newsapi.org/v2/everything?' + 'q=' + q + '&from=2023-07-15&' + 'to=2023-07-15&' + 'pageSize=20&' + 'page=' + page + '&sortBy=popularity&' + 'apiKey=893e90406e96486da7efc4244c066da2';
+            const url = 'https://localhost:3000/news?' + 'q=' + q + '&from=2023-07-15&' + 'to=2023-07-15&' + 'pageSize=20&' + 'page=' + page + '&sortBy=popularity&' + 'apiKey=893e90406e96486da7efc4244c066da2';
 
             var req = new Request(url);
             let a = await fetch(req)
@@ -101,46 +101,45 @@
         };
 
         fetchNews(1, currentQuery)
-        search.addEventListener("click", (e) => {
+        document.getElementById('search').addEventListener("click", (e) => {
             e.preventDefault();
-            let query = searchInput.value;
+            let query = document.getElementById('searchInput').value;
             currentQuery = query;
-            fetchNews(1, query)
+            fetchNews(1, currentQuery)
         })
-        previous.addEventListener("click", (e) => {
+        document.getElementById('previous').addEventListener("click", (e) => {
             e.preventDefault();
             if (currentPage > 1) {
                 currentPage = currentPage - 1
                 fetchNews(currentPage, currentQuery)
             }
         })
-        next.addEventListener("click", (e) => {
+        document.getElementById('next').addEventListener("click", (e) => {
             e.preventDefault();
             currentPage = currentPage + 1;
             fetchNews(currentPage, currentQuery)
         })
-        Tech.addEventListener("click", (e) => {
+        document.getElementById('Tech').addEventListener("click", (e) => {
             e.preventDefault();
             fetchNews(1, "Technology");
         })
-        sports.addEventListener("click", (e) => {
+        document.getElementById('sports').addEventListener("click", (e) => {
             e.preventDefault();
             fetchNews(1, "Sports");
         })
-        business.addEventListener("click", (e) => {
+        document.getElementById('business').addEventListener("click", (e) => {
             e.preventDefault();
             fetchNews(1, "Business");
         })
-        weather.addEventListener("click", (e) => {
+        document.getElementById('weather').addEventListener("click", (e) => {
             e.preventDefault();
             fetchNews(1, "Weather");
         })
-        health.addEventListener("click", (e) => {
+        document.getElementById('health').addEventListener("click", (e) => {
             e.preventDefault();
             fetchNews(1, "Health");
         })
     </script>
-</body>
 </body>
 
 </html>
