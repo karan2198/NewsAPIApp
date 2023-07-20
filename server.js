@@ -15,15 +15,9 @@ const app = express();
 const apiKey = process.env.API_KEY;
 const port = process.env.PORT || 5000;
 app.use(cors({
-  origin: (origin, callback) => {
-    // Check if the request comes from the allowed origin
-    const allowedOrigins = ['http://127.0.0.1:5500', 'https://karan2198.github.io'];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 app.get('/', (req, res) => {
