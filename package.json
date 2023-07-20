@@ -14,7 +14,7 @@
   "name": "newsapiapp",
   "version": "1.0.0",
   "description": "newsapiapp",
-  "main": "server.js", "type": "module",
+  "main": "server.js", 
   "devDependencies": {},
   "author": "karan raj",
   "license": "ISC"
