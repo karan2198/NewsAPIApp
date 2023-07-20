@@ -7,5 +7,15 @@
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "node.js": "^0.0.1-security"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "newsapiapp",
+  "version": "1.0.0",
+  "description": "newsapiapp",
+  "main": "server.js", "type": "module",
+  "devDependencies": {},
+  "author": "karan raj",
+  "license": "ISC"
 }
