@@ -3,7 +3,7 @@ let currentPage = 1
 const fetchNews = async (page, q) => {
     console.log("Fetching News...");
 
-    const url = `https://localhost:3000/news?q=${q}&page=${page}`;
+    const url = `https://localhost:5000/news?q=${q}&page=${page}`;
     console.log(url);
     var req = new Request(url);
     let a = await fetch(req)

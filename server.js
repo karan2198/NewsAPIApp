@@ -13,7 +13,7 @@ require('dotenv').config();
 const cors = require('cors');
 const app = express();
 const apiKey = process.env.API_KEY;
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.use(cors({
   origin: (origin, callback) => {
     // Check if the request comes from the allowed origin
