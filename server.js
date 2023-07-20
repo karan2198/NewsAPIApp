@@ -3,7 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
-const path = require('path');
+
 const keyFilePath = path.join('C:', 'Users', 'karan', 'OneDrive', 'Desktop', 'NewsAPIapp', 'localhost-key.pem');
 
 const certFilePath = path.join('C:', 'Users', 'karan', 'OneDrive', 'Desktop', 'NewsAPIapp', 'localhost.pem');
